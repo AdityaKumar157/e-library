@@ -1,9 +1,9 @@
 package com.makeprojects.library.elib.controller;
 
+import com.makeprojects.library.elib.core.service.definition.MemberService;
 import com.makeprojects.library.elib.dto.AuthDto;
 import com.makeprojects.library.elib.dto.AuthResponse;
 import com.makeprojects.library.elib.entity.Member;
-import com.makeprojects.library.elib.service.MemberService;
 import com.makeprojects.library.elib.util.JwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -46,7 +46,7 @@ public class AuthController {
 
     @PostMapping("/signup")
     public ResponseEntity<?> addMember(@RequestBody Member member) {
-        Member memberToAdd = this.memberService.addMember(member);
+        Member memberToAdd = this.memberService.create(member);
         UserDetails userDetails = new User(memberToAdd.getUserName(), memberToAdd.getPassword(),
                 Collections.singletonList(new SimpleGrantedAuthority(memberToAdd.getRole())));
 

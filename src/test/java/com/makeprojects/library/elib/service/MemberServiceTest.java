@@ -1,6 +1,7 @@
 package com.makeprojects.library.elib.service;
 
 import com.makeprojects.library.elib.ELibraryApplication;
+import com.makeprojects.library.elib.core.service.definition.MemberService;
 import com.makeprojects.library.elib.entity.Member;
 import com.makeprojects.library.elib.enums.SubscriptionStatus;
 import com.makeprojects.library.elib.repository.MemberRepository;

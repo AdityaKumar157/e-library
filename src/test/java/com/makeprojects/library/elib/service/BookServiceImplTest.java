@@ -1,6 +1,7 @@
 package com.makeprojects.library.elib.service;
 
 import com.makeprojects.library.elib.ELibraryApplication;
+import com.makeprojects.library.elib.core.service.definition.BookService;
 import com.makeprojects.library.elib.entity.Book;
 import com.makeprojects.library.elib.enums.Category;
 import com.makeprojects.library.elib.repository.BookRepository;
@@ -14,7 +15,7 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import java.util.*;
 
 @SpringBootTest(classes = ELibraryApplication.class)
-public class BookServiceTest {
+public class BookServiceImplTest {
 
     private final BookService bookService;
 
@@ -31,7 +32,7 @@ public class BookServiceTest {
             .price(300D).build();
 
     @Autowired
-    public BookServiceTest(BookService bookService) {
+    public BookServiceImplTest(BookService bookService) {
         this.bookService = bookService;
     }
 
@@ -42,7 +43,7 @@ public class BookServiceTest {
 
         Mockito.when(this.bookRepository.findAll()).thenReturn(bookList);
 
-        List<Book> fetchedBookList =  this.bookService.getAllBooks();
+        List<Book> fetchedBookList =  this.bookService.getAll();
 
         Assertions.assertEquals(bookList.size(), fetchedBookList.size());
     }
@@ -53,7 +54,7 @@ public class BookServiceTest {
 
         Mockito.when(this.bookRepository.findAll()).thenReturn(bookList);
 
-        List<Book> fetchedBookList =  this.bookService.getAllBooks();
+        List<Book> fetchedBookList =  this.bookService.getAll();
 
         Assertions.assertEquals(bookList.size(), fetchedBookList.size());
     }
@@ -63,7 +64,7 @@ public class BookServiceTest {
         Mockito.when(this.bookRepository.findById(book.getId()))
                 .thenReturn(Optional.of(book));
 
-        Book fetchedBook = this.bookService.getBookById(book.getId());
+        Book fetchedBook = this.bookService.get(book.getId());
 
         Assertions.assertEquals(book, fetchedBook);
     }
@@ -75,7 +76,7 @@ public class BookServiceTest {
         Mockito.when(this.bookRepository.findById(invalidID))
                 .thenReturn(Optional.empty());
 
-        Book fetchedBook = this.bookService.getBookById(invalidID);
+        Book fetchedBook = this.bookService.get(invalidID);
 
         Assertions.assertNull(fetchedBook);
     }
@@ -84,7 +85,7 @@ public class BookServiceTest {
     void addBook_whenBookIsAdded() {
         Mockito.when(this.bookRepository.save(book)).thenReturn(book);
 
-        Book addedBook = this.bookService.addBook(book);
+        Book addedBook = this.bookService.create(book);
 
         Assertions.assertEquals(book, addedBook);
     }
@@ -95,10 +96,10 @@ public class BookServiceTest {
 //        Exception e = new Exception("Exception: {}");
 //        Mockito.when(this.bookRepository.save(book)).thenThrow(e);
 //
-//        //Book addedBook = this.bookService.addBook(book);
+//        //Book addedBook = this.bookService.create(book);
 //
 //        Assertions.assertThrows(Exception.class, () -> {
-//           this.bookService.addBook(book);
+//           this.bookService.create(book);
 //        });
 //    }
 }

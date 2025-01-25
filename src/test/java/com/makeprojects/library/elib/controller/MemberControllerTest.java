@@ -1,9 +1,9 @@
 package com.makeprojects.library.elib.controller;
 
 import com.makeprojects.library.elib.ELibraryApplication;
+import com.makeprojects.library.elib.core.service.definition.MemberService;
 import com.makeprojects.library.elib.entity.Member;
 import com.makeprojects.library.elib.enums.SubscriptionStatus;
-import com.makeprojects.library.elib.service.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
@@ -33,7 +33,7 @@ public class MemberControllerTest {
 
     //@Test
 //    void addMember_whenMemberIsPassed() {
-//        Mockito.when(this.memberService.addMember(member))
+//        Mockito.when(this.memberService.create(member))
 //                .thenReturn(member);
 //
 //        ResponseEntity<Member> responseEntity = this.memberController.addMember(member);

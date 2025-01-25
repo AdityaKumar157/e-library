@@ -1,8 +1,8 @@
 package com.makeprojects.library.elib.controller;
 
+import com.makeprojects.library.elib.core.service.definition.IssueDataService;
 import com.makeprojects.library.elib.dto.IssueDataDto;
 import com.makeprojects.library.elib.entity.IssueData;
-import com.makeprojects.library.elib.service.IssueDataService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -36,13 +36,13 @@ public class IssueDataController {
 
     @GetMapping("/list")
     public ResponseEntity<List<IssueData>> getAllIssueData() {
-        List<IssueData> issueDataList = this.issueDataService.getAllIssueData();
+        List<IssueData> issueDataList = this.issueDataService.getAll();
         return new ResponseEntity<>(issueDataList, HttpStatus.OK);
     }
 
     @GetMapping("/{issueDataId}")
     public ResponseEntity<IssueData> getIssueDataById(@PathVariable UUID issueDataId) {
-        IssueData issueData = this.issueDataService.getIssueDataById(issueDataId);
+        IssueData issueData = this.issueDataService.get(issueDataId);
         return new ResponseEntity<>(issueData, HttpStatus.OK);
     }
 

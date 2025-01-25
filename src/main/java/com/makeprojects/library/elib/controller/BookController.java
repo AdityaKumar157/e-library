@@ -1,7 +1,7 @@
 package com.makeprojects.library.elib.controller;
 
+import com.makeprojects.library.elib.core.service.definition.BookService;
 import com.makeprojects.library.elib.entity.Book;
-import com.makeprojects.library.elib.service.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,20 +22,20 @@ public class BookController {
     }
 
     @PostMapping("/add")
-    public ResponseEntity<Book> addBook(@RequestBody Book book) {
-        Book savedBook = this.bookService.addBook(book);
+    public ResponseEntity<Book> create(@RequestBody Book book) {
+        Book savedBook = this.bookService.create(book);
         return new ResponseEntity<>(book, HttpStatus.CREATED);
     }
 
     @GetMapping("/list")
     public ResponseEntity<List<Book>> getAllBooks() {
-        List<Book> bookList = this.bookService.getAllBooks();
+        List<Book> bookList = this.bookService.getAll();
         return new ResponseEntity<>(bookList, HttpStatus.OK);
     }
 
     @GetMapping("/{bookId}")
     public ResponseEntity<Book> getBookById(@PathVariable UUID bookId) {
-        Book book = this.bookService.getBookById(bookId);
+        Book book = this.bookService.get(bookId);
         return new ResponseEntity<>(book, HttpStatus.OK);
     }
 
